@@ -117,9 +117,11 @@ export function Cases() {
                 <div className="max-w-6xl mx-auto">
                     <div className="flex flex-col md:flex-row-reverse items-center gap-12">
                         <div className="w-full md:w-1/2 flex justify-center">
-                            <div className="w-64 h-64 md:w-80 md:h-80 bg-orange-500 rounded-2xl flex items-center justify-center">
-                                <span className="text-white text-2xl font-bold">ATB Studio</span>
-                            </div>
+                            <img
+                                src="/atb-studio.png"
+                                alt="ATB Studio"
+                                className="w-full max-w-md mx-auto rounded-2xl"
+                            />
                         </div>
                         <div className="w-full md:w-1/2">
                             <span className="text-clivy-purple text-sm font-bold uppercase tracking-wider mb-4 block">Produção Audiovisual</span>
