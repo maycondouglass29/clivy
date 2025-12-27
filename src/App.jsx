@@ -1,11 +1,62 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { Home } from './pages/Home'
 import { Cases } from './pages/Cases'
-import { Menu, X, ArrowRight } from 'lucide-react'
+import { Menu, X, ArrowRight, MessageCircle } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { DiagnosisModal } from './components/DiagnosisModal'
+
+// Componente do botão flutuante de WhatsApp
+function WhatsAppButton() {
+  const [isHovered, setIsHovered] = useState(false)
+  
+  // Número do WhatsApp conectado ao agente (formato: código país + DDD + número)
+  const whatsappNumber = "5522996052766"
+  const defaultMessage = "Olá! Vim pelo site da Clivy e gostaria de saber mais sobre a consultoria de vocês."
+  
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`
+  
+  return (
+    <motion.div
+      className="fixed bottom-6 right-6 z-50"
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ delay: 1, type: "spring", stiffness: 200 }}
+    >
+      <motion.a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg shadow-green-500/30 transition-all duration-300"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        style={{
+          padding: isHovered ? '16px 24px' : '16px',
+        }}
+      >
+        <MessageCircle size={24} className="fill-current" />
+        <AnimatePresence>
+          {isHovered && (
+            <motion.span
+              initial={{ opacity: 0, width: 0 }}
+              animate={{ opacity: 1, width: 'auto' }}
+              exit={{ opacity: 0, width: 0 }}
+              className="font-semibold whitespace-nowrap overflow-hidden"
+            >
+              Fale com a gente
+            </motion.span>
+          )}
+        </AnimatePresence>
+      </motion.a>
+      
+      {/* Pulse animation */}
+      <span className="absolute -inset-1 rounded-full bg-green-500 opacity-30 animate-ping pointer-events-none" />
+    </motion.div>
+  )
+}
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -135,6 +186,9 @@ function Layout({ children }) {
       </header>
 
       {children}
+
+      {/* WhatsApp Floating Button */}
+      <WhatsAppButton />
 
       {/* Footer */}
       <footer className={`py-12 px-4 border-t ${isHome ? 'border-white/5 bg-clivy-dark-light/30 text-gray-400' : 'border-gray-100 bg-white text-gray-500'}`}>
