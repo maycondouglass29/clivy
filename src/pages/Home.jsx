@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { DiagnosisModal } from '../components/DiagnosisModal'
+import { ClientCarousel } from '../components/ClientCarousel'
 
 export function Home() {
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -281,8 +282,8 @@ export function Home() {
             </section>
 
             {/* Cases Preview Section */}
-            <section id="cases-preview" className="py-20 md:py-32 px-4 sm:px-6 relative overflow-hidden">
-                <div className="max-w-4xl mx-auto text-center">
+            <section id="cases-preview" className="py-16 md:py-24 px-4 sm:px-6 relative overflow-hidden">
+                <div className="max-w-4xl mx-auto text-center mb-10">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -292,20 +293,25 @@ export function Home() {
                         <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-semibold uppercase tracking-wider mb-6 text-gray-300">
                             🚀 Transformações reais
                         </span>
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-white">
-                            Quem já passou <br />
-                            <span className="gradient-text">pela transformação</span>
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">
+                            Quem já passou <span className="gradient-text">pela transformação</span>
                         </h2>
-                        <p className="text-gray-400 text-base sm:text-lg max-w-xl mx-auto mb-10 leading-relaxed">
-                            Agências que estavam no caos e hoje operam com previsibilidade, processos claros e tecnologia funcionando.
+                        <p className="text-gray-400 text-base sm:text-lg max-w-xl mx-auto mb-8 leading-relaxed">
+                            Agências que estavam no caos e hoje operam com previsibilidade.
                         </p>
-                        <Link
-                            to="/cases"
-                            className="inline-flex items-center gap-2 bg-white text-clivy-dark px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
-                        >
-                            Ver histórias completas <ChevronRight size={18} />
-                        </Link>
                     </motion.div>
+                </div>
+                
+                {/* Carrossel de Clientes */}
+                <ClientCarousel />
+                
+                <div className="text-center mt-10">
+                    <Link
+                        to="/cases"
+                        className="inline-flex items-center gap-2 bg-white text-clivy-dark px-7 py-3.5 rounded-full font-semibold hover:bg-gray-100 transition-all shadow-lg text-sm"
+                    >
+                        Ver histórias completas <ChevronRight size={16} />
+                    </Link>
                 </div>
             </section>
 
