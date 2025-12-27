@@ -55,7 +55,9 @@ function App() {
                 animate={{ opacity: 1, scale: 1 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                href="#cta"
+                href="https://form.respondi.app/8KiwCz8L"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-white text-clivy-dark hover:bg-gray-100 px-6 py-2.5 rounded-full font-bold transition-all flex items-center gap-2 shadow-lg shadow-white/10"
               >
                 Agendar diagnóstico <ArrowRight size={16} />
@@ -93,7 +95,9 @@ function App() {
                   </a>
                 ))}
                 <a
-                  href="#cta"
+                  href="https://form.respondi.app/8KiwCz8L"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-clivy-purple text-white px-5 py-3 rounded-xl font-bold text-center mt-2 shadow-lg shadow-clivy-purple/30"
                   onClick={() => setMenuOpen(false)}
                 >
@@ -138,10 +142,12 @@ function App() {
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                href="#cta"
+                href="https://form.respondi.app/8KiwCz8L"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-clivy-purple hover:bg-clivy-purple-dark text-white px-8 py-4 rounded-full font-bold transition-all flex items-center justify-center gap-2 text-lg shadow-xl shadow-clivy-purple/25"
               >
-                Agendar diagnóstico gratuito <ArrowRight size={20} />
+                Agendar consultoria gratuita <ArrowRight size={20} />
               </motion.a>
               <motion.a
                 whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.05)" }}
@@ -282,6 +288,17 @@ function App() {
                   </div>
                 ))}
               </div>
+
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href="https://try.web.clickup.com/clickup-14dias-gratis"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 mt-10 bg-clivy-purple hover:bg-clivy-purple-dark text-white px-8 py-4 rounded-full font-bold transition-all shadow-lg shadow-clivy-purple/25"
+              >
+                Teste o ClickUp 14 dias grátis <ArrowRight size={20} />
+              </motion.a>
             </motion.div>
 
             <motion.div
@@ -409,12 +426,12 @@ function App() {
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="https://clivy.com.br"
+              href="https://form.respondi.app/8KiwCz8L"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-white text-clivy-dark hover:bg-gray-100 px-10 py-5 rounded-full font-bold transition-all text-lg shadow-xl shadow-white/10"
             >
-              Agendar diagnóstico gratuito <ArrowRight size={22} />
+              Agendar consultoria gratuita <ArrowRight size={22} />
             </motion.a>
 
             <p className="text-gray-500 text-sm mt-8">
@@ -434,17 +451,30 @@ function App() {
             </div>
 
             <div className="flex items-center gap-8">
-              {['Instagram', 'YouTube', 'LinkedIn'].map((social) => (
-                <a
-                  key={social}
-                  href={`https://${social.toLowerCase()}.com/${social === 'Instagram' ? 'clivycompany' : social === 'YouTube' ? '@clivycompany' : 'company/clivy'}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-clivy-purple transition-colors font-medium"
-                >
-                  {social}
-                </a>
-              ))}
+              <a
+                href="https://www.instagram.com/clivycompany/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-clivy-purple transition-colors font-medium"
+              >
+                Instagram
+              </a>
+              <a
+                href="https://www.youtube.com/@clivycompany"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-clivy-purple transition-colors font-medium"
+              >
+                YouTube
+              </a>
+              <a
+                href="https://www.linkedin.com/company/107012346"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-clivy-purple transition-colors font-medium"
+              >
+                LinkedIn
+              </a>
             </div>
           </div>
 
