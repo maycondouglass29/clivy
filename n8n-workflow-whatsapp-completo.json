@@ -1,0 +1,221 @@
+{
+  "name": "WhatsApp Clivy - Assistente IA Completo",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp",
+        "options": {}
+      },
+      "id": "node-webhook",
+      "name": "Webhook WhatsApp",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300],
+      "webhookId": "clivy-completo"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "id": "cond-event",
+              "leftValue": "={{ $json.body.event }}",
+              "rightValue": "messages.upsert",
+              "operator": { "type": "string", "operation": "equals" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node-filter-event",
+      "name": "Filtrar Mensagens",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [400, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body || $input.first().json;\n\nconst instance = body.instance || 'clivy';\nconst data = body.data || {};\nconst key = data.key || {};\nconst message = data.message || {};\n\nconst remoteJid = key.remoteJid || '';\nconst fromMe = key.fromMe || false;\nconst messageId = key.id || '';\nconst pushName = data.pushName || 'Cliente';\nconst status = data.status || '';\n\nconst isLid = remoteJid.includes('@lid');\n\nlet phoneNumber = '';\nif (isLid) {\n  const lidId = remoteJid.replace('@lid', '').split(':')[0];\n  const lidMap = {\n    '115049288990867': '5522996052766'\n  };\n  phoneNumber = lidMap[lidId] || '5522996052766';\n} else {\n  phoneNumber = remoteJid.replace('@s.whatsapp.net', '').replace('@g.us', '');\n}\n\nlet messageContent = '';\nlet messageType = 'unknown';\n\nif (message.conversation) {\n  messageContent = message.conversation;\n  messageType = 'text';\n} else if (message.extendedTextMessage) {\n  messageContent = message.extendedTextMessage.text || '';\n  messageType = 'text';\n} else if (message.imageMessage) {\n  messageContent = message.imageMessage.caption || '[Imagem recebida]';\n  messageType = 'image';\n} else if (message.audioMessage) {\n  messageContent = '[Áudio recebido]';\n  messageType = 'audio';\n} else if (message.videoMessage) {\n  messageContent = message.videoMessage.caption || '[Vídeo recebido]';\n  messageType = 'video';\n} else if (message.documentMessage) {\n  messageContent = '[Documento recebido]';\n  messageType = 'document';\n} else if (message.stickerMessage) {\n  messageContent = '[Sticker recebido]';\n  messageType = 'sticker';\n}\n\nreturn {\n  instance,\n  phoneNumber,\n  remoteJid,\n  isLid,\n  fromMe,\n  messageId,\n  messageContent,\n  messageType,\n  pushName,\n  status,\n  timestamp: new Date().toISOString()\n};"
+      },
+      "id": "node-extract",
+      "name": "Extrair Dados",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [600, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "id": "cond-not-from-me",
+              "leftValue": "={{ $json.fromMe }}",
+              "rightValue": false,
+              "operator": { "type": "boolean", "operation": "equals" }
+            },
+            {
+              "id": "cond-has-content",
+              "leftValue": "={{ $json.messageContent }}",
+              "rightValue": "",
+              "operator": { "type": "string", "operation": "notEquals" }
+            },
+            {
+              "id": "cond-is-text",
+              "leftValue": "={{ $json.messageType }}",
+              "rightValue": "text",
+              "operator": { "type": "string", "operation": "equals" }
+            },
+            {
+              "id": "cond-not-ack",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "DELIVERY_ACK",
+              "operator": { "type": "string", "operation": "notEquals" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node-validate",
+      "name": "Validar Mensagem",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [800, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://evolution_api:8080/message/sendPresence/{{ $json.instance }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "clivy_token_secreto" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={ \"number\": \"{{ $json.phoneNumber }}\", \"presence\": \"composing\" }",
+        "options": { "timeout": 5000 }
+      },
+      "id": "node-typing",
+      "name": "Indicador Digitando",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1000, 300],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $('Validar Mensagem').first().json;\n\nconst systemPrompt = `Você é a assistente virtual da Clivy Company. Converse de forma natural como uma pessoa real no WhatsApp.\n\n=== QUEM É A CLIVY ===\n\nA Clivy é uma consultoria de gestão operacional especializada em empresas de serviços, principalmente agências de marketing digital. Somos Official Partner do ClickUp. Fundadores: Guilherme Gomes de Paula (CEO) e Laura Gonçalves de Souza.\n\nNossa missão é eliminar o caos operacional e a cultura de apagar incêndios, transformando operações manuais em máquinas de escala previsíveis e lucrativas.\n\nSurgimos de uma dor latente do mercado: muitos donos de empresas perdem clientes e enfrentam problemas sérios na operação por falta de conhecimento em processos, liderança e administração.\n\n=== O MÉTODO CLIVY: 3 PILARES ===\n\nPILAR LIDERANÇA: O time é reflexo do líder. A organização começa no topo. Sem liderança organizada, processos são ignorados e tecnologia vira custo. Trabalhamos mapeamento de organograma, definição de papéis e responsabilidades, rituais de gestão como dailies, weeklies e monthlies, definição de OKRs e metas SMART, formação e treinamento de líderes, cultura de alta performance com autonomia e responsabilidade.\n\nPILAR PROCESSOS: Transformamos conhecimento tácito (na cabeça das pessoas) em conhecimento explícito (documentado). Criamos POPs (Procedimentos Operacionais Padrão) para cada etapa da entrega, desde entrada do cliente até encerramento do contrato. Qualquer pessoa consegue executar um passo a passo pré-definido. Inclui playbooks de áreas, estrutura de rotinas e rituais, produtização de serviços, mapeamento de fluxos de trabalho, padronização de entregas.\n\nPILAR TECNOLOGIA: É o sistema operacional que sustenta os outros pilares. Ferramenta central é o ClickUp onde centralizamos Marketing, Vendas, RH e Operações. Usamos n8n e Make para automações e integrações. Evolution API para integração com WhatsApp. Dashboards BI para visualização de indicadores em tempo real.\n\n=== ESTRUTURA NO CLICKUP ===\n\nEspaços representam Departamentos como Comercial, Marketing, RH, Produtos, Projetos e Gestão. Pastas representam Setores dentro de cada departamento. Listas representam Processos específicos. Tarefas são a execução com responsável e prazo.\n\n=== O QUE ENTREGAMOS ===\n\nEstrutura completa no ClickUp com implementação de departamentos, dashboards personalizados e centralização da comunicação.\n\nAutomações principais: cadastro de lead no pipeline, entrada do cliente com onboarding, abertura de projeto, encontros com clientes, avisos automáticos via WhatsApp, NPS automático após reuniões.\n\nConsultorias e treinamentos: formação da liderança, treinamentos em grupo sobre ClickUp, treinamentos específicos por departamento.\n\n=== ETAPAS DA IMPLEMENTAÇÃO ===\n\nMapeamento do Organograma, Formação da Liderança, Estrutura de Rotinas e Rituais, Definição de OKRs, Criação de Serviços e Produtização, Construção de Processos, Gestão do Time, Implementação do ClickUp, Criação de Automações, Treinamento da Equipe.\n\n=== SERVIÇOS ===\n\nDiagnóstico de Gestão: análise profunda da operação atual para identificar gargalos e pontos de caos.\n\nImplementação de ClickUp: estruturação completa seguindo hierarquia validada pela Clivy.\n\nConsultoria de Escala: acompanhamento estratégico para agências que faturam alto mas estão presas no operacional.\n\n=== CASES DE SUCESSO ===\n\nGabriel Rucci (Lançamentos): dobrou capacidade operacional e eliminou caos em períodos críticos.\n\nCacique Ads (Performance): estruturação robusta para suportar crescimento acelerado.\n\nArretada Agência (Comunicação): união de criatividade com eficiência operacional.\n\nV4 Company: uma das maiores redes de agências do Brasil confia no método Clivy.\n\n=== PÚBLICO IDEAL ===\n\nAgências de conteúdo, tráfego, lançamentos, 360 graus e produtoras audiovisuais que buscam escala. Empresas de serviços que dependem de equipes executando e vendendo sua hora.\n\n=== CONTATOS OFICIAIS ===\n\nDiagnóstico Gratuito: https://form.respondi.app/8KiwCz8L\nClickUp 14 dias grátis: https://try.web.clickup.com/clickup-14dias-gratis\nInstagram: @clivycompany\nYouTube: youtube.com/@clivycompany\nLinkedIn: linkedin.com/company/clivy-company\nEmail: clivgestaoempresarial@gmail.com\n\n=== REGRAS DE RESPOSTA ===\n\n1. Converse naturalmente como pessoa real no WhatsApp\n2. Respostas entre 3 a 6 frases, informativas e concisas\n3. PROIBIDO usar listas, bullets, números, travessões ou marcadores\n4. PROIBIDO usar asteriscos, negrito, itálico ou formatação\n5. PROIBIDO emojis em excesso, máximo 1 se fizer sentido\n6. Use as informações acima para responder com precisão sobre a Clivy\n7. Mantenha contexto da conversa, responda especificamente o que foi perguntado\n8. SEMPRE termine com pergunta relacionada ao assunto para dar continuidade\n9. A pergunta final deve aprofundar o tema ou explorar aspecto relacionado\n10. Se o lead demonstrar interesse em contratar, direcione para o Diagnóstico Gratuito\n\n=== EXEMPLOS ===\n\nLead: O que é a Clivy?\nResposta: A Clivy é uma consultoria de gestão operacional especializada em agências de marketing digital. Ajudamos donos de agências a saírem do caos operacional através de três pilares: liderança, processos e tecnologia. Somos parceiros oficiais do ClickUp e já ajudamos empresas como V4 Company e Gabriel Rucci a escalarem suas operações. Você tem uma agência ou empresa de serviços?\n\nLead: Como funciona o método de vocês?\nResposta: O Método Clivy trabalha três pilares que se complementam. Na liderança desenvolvemos os gestores e criamos rituais de acompanhamento. Nos processos documentamos tudo que se repete através de POPs detalhados. E na tecnologia centralizamos a gestão no ClickUp com automações que eliminam trabalho manual. A implementação segue etapas estruturadas desde mapeamento do organograma até treinamento da equipe. Qual desses pilares você sente que precisa mais de atenção na sua operação?\n\nLead: Vocês usam qual ferramenta?\nResposta: Nossa ferramenta central é o ClickUp, onde centralizamos todos os departamentos da empresa como comercial, marketing, RH e operações. Somos parceiros oficiais do ClickUp, o que nos dá acesso a recursos avançados. Além disso usamos n8n e Make para automações e integramos com WhatsApp para comunicação automatizada com clientes. Você já usa alguma ferramenta de gestão hoje?\n\nLead: Quero saber mais sobre processos\nResposta: No pilar de processos transformamos o conhecimento que está na cabeça das pessoas em documentação clara e acessível. Criamos POPs detalhados para cada atividade da agência, desde entrada do cliente até encerramento do contrato. Isso garante que qualquer pessoa do time consiga executar com qualidade seguindo um passo a passo definido, sem depender do dono. Como está a documentação de processos na sua empresa hoje?\n\nLead: Quanto custa?\nResposta: O investimento varia de acordo com o tamanho da operação e as necessidades específicas de cada empresa. O primeiro passo é fazer um diagnóstico gratuito onde analisamos sua situação atual e identificamos os principais gargalos. A partir daí conseguimos montar uma proposta personalizada. Posso te passar o link para agendar esse diagnóstico?`;\n\nconst requestBody = {\n  model: 'llama-3.1-8b-instant',\n  messages: [\n    { role: 'system', content: systemPrompt },\n    { role: 'user', content: input.messageContent }\n  ],\n  temperature: 0.7,\n  max_tokens: 600\n};\n\nreturn {\n  instance: input.instance,\n  phoneNumber: input.phoneNumber,\n  pushName: input.pushName,\n  messageContent: input.messageContent,\n  messageType: input.messageType,\n  messageId: input.messageId,\n  groqRequestBody: requestBody\n};"
+      },
+      "id": "node-prompt",
+      "name": "Preparar Prompt + Base Conhecimento",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1200, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer SUA_GROQ_API_KEY_AQUI" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.groqRequestBody) }}",
+        "options": { "timeout": 30000 }
+      },
+      "id": "node-groq",
+      "name": "Chamar Groq",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1400, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const groqResponse = $input.first().json;\nconst prevData = $('Preparar Prompt + Base Conhecimento').first().json;\n\nlet aiResponse = 'Oi! Desculpa, tive um probleminha aqui. Pode repetir sua pergunta?';\n\nif (groqResponse.choices && groqResponse.choices.length > 0 && groqResponse.choices[0].message) {\n  let response = groqResponse.choices[0].message.content;\n  \n  // Remove formatação markdown que possa ter escapado\n  response = response.replace(/\\*\\*/g, '');\n  response = response.replace(/\\*/g, '');\n  response = response.replace(/^[-•●▪︎▸►]\\s*/gm, '');\n  response = response.replace(/^\\d+\\.\\s*/gm, '');\n  response = response.replace(/^\\d+\\)\\s*/gm, '');\n  response = response.replace(/\\n[-•●▪︎▸►]\\s*/g, ' ');\n  response = response.replace(/\\n\\d+\\.\\s*/g, ' ');\n  response = response.replace(/\\n+/g, ' ');\n  response = response.replace(/\\s+/g, ' ');\n  response = response.trim();\n  \n  aiResponse = response;\n}\n\nconst usage = groqResponse.usage || {};\n\nreturn {\n  instance: prevData.instance,\n  phoneNumber: prevData.phoneNumber,\n  pushName: prevData.pushName,\n  originalMessage: prevData.messageContent,\n  messageId: prevData.messageId,\n  aiResponse: aiResponse,\n  tokensUsed: usage.total_tokens || 0\n};"
+      },
+      "id": "node-process",
+      "name": "Processar Resposta IA",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1600, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://evolution_api:8080/message/sendText/{{ $json.instance }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "clivy_token_secreto" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ number: $json.phoneNumber, text: $json.aiResponse }) }}",
+        "options": {}
+      },
+      "id": "node-send",
+      "name": "Enviar Resposta WhatsApp",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1800, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const sendResponse = $input.first().json;\nconst prevData = $('Processar Resposta IA').first().json;\n\nreturn {\n  success: true,\n  timestamp: new Date().toISOString(),\n  cliente: prevData.pushName,\n  telefone: prevData.phoneNumber,\n  messageId: prevData.messageId,\n  pergunta: prevData.originalMessage,\n  resposta: prevData.aiResponse.substring(0, 100) + '...',\n  tokensUsados: prevData.tokensUsed,\n  evolutionResponse: sendResponse\n};"
+      },
+      "id": "node-log",
+      "name": "Registrar Log",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2000, 300]
+    }
+  ],
+  "connections": {
+    "Webhook WhatsApp": {
+      "main": [[{ "node": "Filtrar Mensagens", "type": "main", "index": 0 }]]
+    },
+    "Filtrar Mensagens": {
+      "main": [[{ "node": "Extrair Dados", "type": "main", "index": 0 }]]
+    },
+    "Extrair Dados": {
+      "main": [[{ "node": "Validar Mensagem", "type": "main", "index": 0 }]]
+    },
+    "Validar Mensagem": {
+      "main": [[{ "node": "Indicador Digitando", "type": "main", "index": 0 }]]
+    },
+    "Indicador Digitando": {
+      "main": [[{ "node": "Preparar Prompt + Base Conhecimento", "type": "main", "index": 0 }]]
+    },
+    "Preparar Prompt + Base Conhecimento": {
+      "main": [[{ "node": "Chamar Groq", "type": "main", "index": 0 }]]
+    },
+    "Chamar Groq": {
+      "main": [[{ "node": "Processar Resposta IA", "type": "main", "index": 0 }]]
+    },
+    "Processar Resposta IA": {
+      "main": [[{ "node": "Enviar Resposta WhatsApp", "type": "main", "index": 0 }]]
+    },
+    "Enviar Resposta WhatsApp": {
+      "main": [[{ "node": "Registrar Log", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "versionId": "4",
+  "meta": { "instanceId": "clivy-completo" },
+  "tags": []
+}
