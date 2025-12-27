@@ -83,9 +83,11 @@ function Layout({ children }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             <Link to="/" className="flex items-center group">
-              <span className={`text-2xl md:text-3xl font-heading font-bold tracking-tight ${isHome ? 'text-white' : 'text-clivy-dark'}`}>
-                CLIVY<sup className="text-xs text-clivy-purple">®</sup>
-              </span>
+              <img 
+                src="/clivy-logo.png" 
+                alt="Clivy" 
+                className={`h-8 md:h-10 ${isHome ? '' : 'brightness-0'}`}
+              />
             </Link>
 
             {/* Desktop Nav */}
@@ -195,8 +197,12 @@ function Layout({ children }) {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex flex-col items-center md:items-start gap-2">
-              <span className={`text-2xl font-bold font-heading ${isHome ? 'text-white' : 'text-clivy-dark'}`}>CLIVY<sup className="text-xs text-clivy-purple">®</sup></span>
-              <p className="text-sm">Elevando o padrão de gestão no Brasil.</p>
+              <img 
+                src="/clivy-logo.png" 
+                alt="Clivy" 
+                className={`h-6 ${isHome ? '' : 'brightness-0'}`}
+              />
+              <p className="text-sm mt-2">Elevando o padrão de gestão no Brasil.</p>
             </div>
 
             <div className="flex items-center gap-8">
