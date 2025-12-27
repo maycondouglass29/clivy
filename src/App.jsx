@@ -1,9 +1,11 @@
-import { ArrowRight, Users, FileText, Zap, CheckCircle, Star, Menu, X, ChevronRight, Play } from 'lucide-react'
+import { ArrowRight, Users, FileText, Zap, CheckCircle, Star, Menu, X, ChevronRight, Play, ArrowUpRight } from 'lucide-react'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { DiagnosisModal } from './components/DiagnosisModal'
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -22,6 +24,8 @@ function App() {
 
   return (
     <div className="min-h-screen bg-clivy-dark selection:bg-clivy-purple selection:text-white">
+      <DiagnosisModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-clivy-dark/80 backdrop-blur-lg border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,18 +54,16 @@ function App() {
                   {item}
                 </motion.a>
               ))}
-              <motion.a
+              <motion.button
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                href="https://form.respondi.app/8KiwCz8L"
-                target="_blank"
-                rel="noopener noreferrer"
+                onClick={() => setIsModalOpen(true)}
                 className="bg-white text-clivy-dark hover:bg-gray-100 px-6 py-2.5 rounded-full font-bold transition-all flex items-center gap-2 shadow-lg shadow-white/10"
               >
                 Agendar diagnóstico <ArrowRight size={16} />
-              </motion.a>
+              </motion.button>
             </nav>
 
             {/* Mobile Menu Button */}
@@ -94,15 +96,12 @@ function App() {
                     {item}
                   </a>
                 ))}
-                <a
-                  href="https://form.respondi.app/8KiwCz8L"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-clivy-purple text-white px-5 py-3 rounded-xl font-bold text-center mt-2 shadow-lg shadow-clivy-purple/30"
-                  onClick={() => setMenuOpen(false)}
+                <button
+                  className="bg-clivy-purple text-white px-5 py-3 rounded-xl font-bold text-center mt-2 shadow-lg shadow-clivy-purple/30 w-full"
+                  onClick={() => { setMenuOpen(false); setIsModalOpen(true); }}
                 >
                   Agendar diagnóstico
-                </a>
+                </button>
               </nav>
             </motion.div>
           )}
@@ -139,16 +138,14 @@ function App() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <motion.a
+              <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                href="https://form.respondi.app/8KiwCz8L"
-                target="_blank"
-                rel="noopener noreferrer"
+                onClick={() => setIsModalOpen(true)}
                 className="bg-clivy-purple hover:bg-clivy-purple-dark text-white px-8 py-4 rounded-full font-bold transition-all flex items-center justify-center gap-2 text-lg shadow-xl shadow-clivy-purple/25"
               >
                 Agendar consultoria gratuita <ArrowRight size={20} />
-              </motion.a>
+              </motion.button>
               <motion.a
                 whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.05)" }}
                 whileTap={{ scale: 0.95 }}
@@ -352,137 +349,185 @@ function App() {
         </div>
       </section>
 
-      {/* Depoimento Section */}
-      <section id="depoimento" className="py-24 md:py-32 px-4 relative">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Transformação real <br />
-              <span className="gradient-text">e comprovada</span>
+      {/* CASES/DEPOIMENTO SECTION (REF DESIGN) */}
+      <section id="depoimento" className="py-24 md:py-32 px-4 bg-white text-clivy-dark relative overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gray-200 bg-gray-50 text-xs font-semibold uppercase tracking-wider mb-6">
+              🌱 Resultados comprovados
+            </span>
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 font-heading">
+              Conheça os nossos <br />
+              <span className="text-clivy-purple">cases de sucesso</span>
             </h2>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="glass-panel rounded-3xl p-10 md:p-14 relative"
-          >
-            <div className="absolute top-0 right-0 p-10 opacity-10">
-              <svg width="120" height="120" viewBox="0 0 24 24" fill="white">
-                <path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.01697 21L5.01697 18C5.01697 16.8954 5.9124 16 7.01697 16H10.017C10.5693 16 11.017 15.5523 11.017 15V9C11.017 8.44772 10.5693 8 10.017 8H6.01697C5.46468 8 5.01697 8.44772 5.01697 9V11C5.01697 11.5523 4.56925 12 4.01697 12H3.01697V5H13.017V15C13.017 18.3137 10.3307 21 7.01697 21H5.01697Z" />
-              </svg>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-10">
+              Descubra como agências e consultorias transformaram suas operações com as soluções da Clivy Company.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <button className="bg-clivy-dark text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2 hover:bg-black transition-colors">
+                Ver cases detalhados <ChevronRight size={16} />
+              </button>
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="bg-white border border-gray-200 text-clivy-dark px-6 py-3 rounded-lg font-semibold flex items-center gap-2 hover:border-gray-400 transition-colors"
+              >
+                Quero resultados parecidos <ArrowUpRight size={16} />
+              </button>
             </div>
+          </div>
 
-            <div className="flex gap-2 mb-8">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="text-yellow-400 fill-yellow-400" size={20} />
-              ))}
-            </div>
-
-            <blockquote className="text-2xl md:text-3xl font-medium text-white leading-relaxed mb-10 relative z-10">
-              "Antes da Clivy, minha agência vivia apagando incêndios e eu trabalhava 14h por dia.
-              Em 3 meses, estruturamos todos os processos e hoje a operação roda sem depender 100% de mim.
-              <span className="text-clivy-purple font-bold"> Reduzimos o churn em 40% e dobramos o faturamento.</span>"
-            </blockquote>
-
-            <div className="flex items-center gap-5 border-t border-white/10 pt-8">
-              <div className="w-16 h-16 bg-gradient-to-br from-clivy-purple to-pink-500 rounded-full flex items-center justify-center text-xl font-bold p-[2px]">
-                <div className="w-full h-full bg-clivy-dark rounded-full flex items-center justify-center">RM</div>
+          {/* Cards Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Gabriel Rucci Card */}
+            <div className="col-span-1 md:col-span-2 lg:col-span-2 relative group overflow-hidden rounded-3xl bg-clivy-dark text-white min-h-[400px] flex flex-col md:flex-row">
+              <div className="w-full md:w-1/2 h-64 md:h-auto relative">
+                <img
+                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2574&auto=format&fit=crop"
+                  alt="Gabriel Rucci"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-clivy-dark to-transparent md:bg-gradient-to-r"></div>
               </div>
-              <div>
-                <p className="font-bold text-lg text-white">Rafael Mendes</p>
-                <p className="text-clivy-purple text-sm font-medium">CEO, Agência Impulso Digital</p>
+              <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                <span className="text-clivy-purple font-semibold mb-2">Vendas e Lançamentos</span>
+                <h3 className="text-3xl font-bold mb-4">Gabriel Rucci</h3>
+                <p className="text-gray-400 mb-6 leading-relaxed">
+                  "Implementamos processos que permitiram escalar nossas operações mantendo a qualidade. A organização do ClickUp foi fundamental."
+                </p>
+                <a href="#" className="inline-flex items-center gap-2 hover:gap-3 transition-all text-white font-medium">
+                  Ler case completo <ArrowRight size={16} />
+                </a>
               </div>
             </div>
-          </motion.div>
+
+            {/* Cacique Ads Card */}
+            <div className="col-span-1 relative group overflow-hidden rounded-3xl bg-black text-white min-h-[400px]">
+              <img
+                src="https://images.unsplash.com/photo-1618077360395-5296043000d3?auto=format&fit=crop&q=80&w=2528"
+                alt="Cacique Ads"
+                className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+              <div className="relative h-full p-8 flex flex-col justify-end">
+                <span className="text-clivy-purple text-sm font-semibold mb-2">Agência de Performance</span>
+                <h3 className="text-2xl font-bold mb-2">Cacique Ads</h3>
+                <p className="text-gray-300 text-sm line-clamp-3 mb-4">
+                  Suportar o crescimento acelerado com uma estrutura operacional robusta.
+                </p>
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="w-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 text-white rounded-lg py-3 font-semibold transition-all">
+                  Ver case
+                </button>
+              </div>
+            </div>
+
+            {/* Arretada Agencia Card */}
+            <div className="col-span-1 relative group overflow-hidden rounded-3xl bg-black text-white min-h-[400px]">
+              <img
+                src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=2664"
+                alt="Arretada Agência"
+                className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+              <div className="relative h-full p-8 flex flex-col justify-end">
+                <span className="text-clivy-purple text-sm font-semibold mb-2">Comunicação Digital</span>
+                <h3 className="text-2xl font-bold mb-2">Arretada Agência</h3>
+                <p className="text-gray-300 text-sm line-clamp-3 mb-4">
+                  Uma cultura que une criatividade com eficiência operacional.
+                </p>
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="w-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 text-white rounded-lg py-3 font-semibold transition-all">
+                  Ver case
+                </button>
+              </div>
+            </div>
+
+            {/* ATB Studio Card */}
+            <div className="col-span-1 md:col-span-2 lg:col-span-2 relative group overflow-hidden rounded-3xl bg-[#FF8A00] text-white min-h-[400px] flex flex-col md:flex-row-reverse">
+              <div className="w-full md:w-1/2 h-64 md:h-auto relative flex items-center justify-center p-8">
+                <img
+                  src="https://images.unsplash.com/photo-1583512603837-78f9ebadc2df?auto=format&fit=crop&q=80&w=2600"
+                  alt="ATB Studio"
+                  className="w-full h-full object-cover rounded-2xl grayscale"
+                />
+              </div>
+              <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-black">
+                <span className="text-[#FF8A00] font-semibold mb-2">Produção Audiovisual</span>
+                <h3 className="text-3xl font-bold mb-4">ATB Studio</h3>
+                <p className="text-gray-400 mb-6 leading-relaxed">
+                  "O desafio era gerir múltiplos projetos audiovisuais simultâneos. Criamos uma esteira operacional completa."
+                </p>
+                <a href="#" className="inline-flex items-center gap-2 hover:gap-3 transition-all text-white font-medium">
+                  Ler case completo <ArrowRight size={16} />
+                </a>
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section id="cta" className="py-24 md:py-32 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-clivy-dark to-clivy-purple/10 pointer-events-none"></div>
+      <section id="cta" className="py-24 md:py-32 px-4 relative overflow-hidden bg-gray-50">
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-3xl p-12 md:p-20 shadow-2xl"
+            className="bg-white rounded-3xl p-12 md:p-20 shadow-2xl"
           >
-            <h2 className="text-4xl md:text-6xl font-bold mb-8">
-              Pronto para escalar <br />
-              <span className="gradient-text">com previsibilidade?</span>
+            <h2 className="text-4xl md:text-6xl font-bold mb-8 text-clivy-dark">
+              Quer resultados como esses <br />
+              <span className="text-clivy-purple">na sua agência?</span>
             </h2>
-            <p className="text-gray-400 text-lg md:text-xl mb-12 max-w-2xl mx-auto">
-              Agende um diagnóstico gratuito e descubra exatamente o que está travando
-              o crescimento da sua empresa hoje.
+            <p className="text-gray-500 text-lg md:text-xl mb-12 max-w-2xl mx-auto">
+              Agende um diagnóstico gratuito e descubra como podemos transformar sua operação.
             </p>
 
-            <motion.a
+            <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="https://form.respondi.app/8KiwCz8L"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-white text-clivy-dark hover:bg-gray-100 px-10 py-5 rounded-full font-bold transition-all text-lg shadow-xl shadow-white/10"
+              onClick={() => setIsModalOpen(true)}
+              className="inline-flex items-center gap-3 bg-clivy-dark text-white hover:bg-black px-10 py-5 rounded-lg font-bold transition-all text-lg shadow-xl"
             >
-              Agendar consultoria gratuita <ArrowRight size={22} />
-            </motion.a>
-
-            <p className="text-gray-500 text-sm mt-8">
-              Sem compromisso. Apenas 30 minutos podem mudar o rumo do seu ano.
-            </p>
+              Agendar diagnóstico gratuito <ArrowRight size={22} />
+            </motion.button>
           </motion.div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-4 border-t border-white/5 bg-clivy-dark-light/30">
+      <footer className="py-12 px-4 border-t border-gray-100 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex flex-col items-center md:items-start gap-2">
-              <span className="text-2xl font-bold font-heading">CLIVY<sup className="text-xs text-clivy-purple">®</sup></span>
+              <span className="text-2xl font-bold font-heading text-clivy-dark">CLIVY<sup className="text-xs text-clivy-purple">®</sup></span>
               <p className="text-gray-500 text-sm">Elevando o padrão de gestão no Brasil.</p>
             </div>
 
             <div className="flex items-center gap-8">
-              <a
-                href="https://www.instagram.com/clivycompany/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-clivy-purple transition-colors font-medium"
-              >
-                Instagram
-              </a>
-              <a
-                href="https://www.youtube.com/@clivycompany"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-clivy-purple transition-colors font-medium"
-              >
-                YouTube
-              </a>
-              <a
-                href="https://www.linkedin.com/company/107012346"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-clivy-purple transition-colors font-medium"
-              >
-                LinkedIn
-              </a>
+              {['Instagram', 'YouTube', 'LinkedIn'].map((social) => (
+                <a
+                  key={social}
+                  href={`https://${social.toLowerCase()}.com/${social === 'Instagram' ? 'clivycompany' : social === 'YouTube' ? '@clivycompany' : 'company/clivy'}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-clivy-purple transition-colors font-medium"
+                >
+                  {social}
+                </a>
+              ))}
             </div>
           </div>
 
-          <div className="text-center mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
+          <div className="text-center mt-12 pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
             <p>© 2025 Clivy Company. Todos os direitos reservados.</p>
             <div className="flex gap-4 mt-4 md:mt-0">
-              <a href="#" className="hover:text-gray-400">Termos de Uso</a>
-              <a href="#" className="hover:text-gray-400">Privacidade</a>
+              <a href="#" className="hover:text-clivy-purple">Termos de Uso</a>
+              <a href="#" className="hover:text-clivy-purple">Privacidade</a>
             </div>
           </div>
         </div>
