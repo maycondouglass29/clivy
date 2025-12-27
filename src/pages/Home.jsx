@@ -25,7 +25,7 @@ export function Home() {
             <DiagnosisModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
             {/* Hero Section */}
-            <section className="hero-gradient pt-32 md:pt-44 pb-16 md:pb-24 px-4 sm:px-6 relative overflow-hidden min-h-[90vh] flex items-center">
+            <section className="hero-gradient pt-28 md:pt-36 pb-12 md:pb-16 px-4 sm:px-6 relative overflow-hidden">
                 <div className="absolute top-20 left-10 w-72 h-72 bg-clivy-purple/20 rounded-full blur-[100px] animate-pulse" />
                 <div className="absolute bottom-20 right-10 w-96 h-96 bg-pink-500/10 rounded-full blur-[120px] animate-pulse" />
 
@@ -35,40 +35,38 @@ export function Home() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
                     >
-                        <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-5 py-2 mb-10">
+                        <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-1.5 mb-6">
                             <span className="flex h-2 w-2 relative">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-clivy-purple opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-clivy-purple"></span>
                             </span>
-                            <span className="text-sm font-medium text-gray-300">Consultoria Especializada em ClickUp</span>
+                            <span className="text-xs sm:text-sm font-medium text-gray-300">Consultoria Especializada em ClickUp</span>
                         </div>
 
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-8 tracking-tight">
-                            Sua agência cresce, <br className="hidden sm:block" />
-                            mas a operação não acompanha? <br className="hidden sm:block" />
-                            <span className="gradient-text pb-2">Vamos resolver isso.</span>
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.15] mb-5 tracking-tight">
+                            Sua agência cresce, mas a operação não acompanha? <span className="gradient-text">Vamos resolver isso.</span>
                         </h1>
 
-                        <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed px-4">
-                            Transformamos agências desorganizadas em operações previsíveis através de liderança, processos e tecnologia integrados.
+                        <p className="text-sm sm:text-base md:text-lg text-gray-400 max-w-xl mx-auto mb-8 leading-relaxed">
+                            Transformamos agências desorganizadas em operações previsíveis através de liderança, processos e tecnologia.
                         </p>
 
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4">
+                        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
                             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
                                 <Link
                                     to="/cases"
-                                    className="flex items-center justify-center gap-2 px-8 py-4 rounded-full font-semibold transition-all text-base border border-white/20 text-white hover:bg-white/5 hover:border-white/30 w-full sm:w-auto"
+                                    className="flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold transition-all text-sm border border-white/20 text-white hover:bg-white/5 w-full sm:w-auto"
                                 >
-                                    Veja nossos cases <ArrowRight size={18} />
+                                    Veja nossos cases <ArrowRight size={16} />
                                 </Link>
                             </motion.div>
                             <motion.button
                                 whileHover={{ scale: 1.03 }}
                                 whileTap={{ scale: 0.98 }}
                                 onClick={() => setIsModalOpen(true)}
-                                className="bg-clivy-purple hover:bg-clivy-purple-dark text-white px-8 py-4 rounded-full font-semibold transition-all flex items-center justify-center gap-2 text-base shadow-lg shadow-clivy-purple/20 w-full sm:w-auto"
+                                className="bg-clivy-purple hover:bg-clivy-purple-dark text-white px-6 py-3 rounded-full font-semibold transition-all flex items-center justify-center gap-2 text-sm shadow-lg shadow-clivy-purple/20 w-full sm:w-auto"
                             >
-                                Agendar diagnóstico <ArrowRight size={18} />
+                                Agendar diagnóstico <ArrowRight size={16} />
                             </motion.button>
                         </div>
                     </motion.div>
