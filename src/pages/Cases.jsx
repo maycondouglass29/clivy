@@ -68,8 +68,8 @@ export function Cases() {
                 </div>
             </section>
 
-            {/* Cacique Ads - Inverted */}
-            <section className="py-16 px-4 bg-gray-50">
+            {/* Cacique Ads - Dark Section */}
+            <section className="py-16 px-4 bg-clivy-dark text-white">
                 <div className="max-w-6xl mx-auto">
                     <div className="flex flex-col md:flex-row-reverse items-center gap-12">
                         <div className="w-full md:w-1/2">
@@ -82,7 +82,7 @@ export function Cases() {
                         <div className="w-full md:w-1/2">
                             <span className="text-clivy-purple text-sm font-bold uppercase tracking-wider mb-4 block">Agência de Performance</span>
                             <h2 className="text-4xl md:text-5xl font-bold mb-6">Cacique Ads</h2>
-                            <p className="text-gray-600 text-lg leading-relaxed mb-8">
+                            <p className="text-gray-300 text-lg leading-relaxed mb-8">
                                 A Cacique Ads precisava de uma estrutura operacional robusta para suportar seu crescimento acelerado. Implementamos sistemas e processos que transformaram a gestão de projetos e otimizaram toda a operação da agência.
                             </p>
                         </div>
