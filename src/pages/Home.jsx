@@ -222,32 +222,45 @@ export function Home() {
                             className="relative"
                         >
                             <div className="absolute -inset-1 bg-gradient-to-r from-clivy-purple to-pink-600 rounded-2xl blur opacity-30 animate-pulse"></div>
-                            <div className="relative glass-panel rounded-2xl p-8 border border-white/10">
-                                <div className="flex items-center gap-4 mb-8">
+                            <div className="relative bg-gradient-to-br from-[#2D1B4E] to-[#1a1025] rounded-2xl p-6 border border-white/10 shadow-2xl">
+                                {/* Window Controls */}
+                                <div className="flex items-center gap-3 mb-6">
                                     <div className="flex gap-2">
-                                        <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-                                        <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                                        <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+                                        <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                                        <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                        <div className="w-3 h-3 rounded-full bg-green-500"></div>
                                     </div>
-                                    <div className="h-6 w-64 bg-white/5 rounded-md"></div>
                                 </div>
 
-                                <div className="space-y-4">
-                                    {[1, 2, 3, 4].map((i) => (
-                                        <div key={i} className="flex items-center gap-4 p-4 bg-black/20 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
-                                            <div className={`w-3 h-3 rounded-full ${i === 1 ? 'bg-purple-500' : i === 2 ? 'bg-blue-500' : i === 3 ? 'bg-green-500' : 'bg-orange-500'}`}></div>
-                                            <div className="h-2 w-24 bg-white/10 rounded-full"></div>
-                                            <div className="ml-auto h-2 w-16 bg-white/5 rounded-full"></div>
-                                            <div className="w-8 h-8 rounded-full bg-white/5"></div>
+                                {/* ClickUp-style Task List */}
+                                <div className="space-y-3">
+                                    {[
+                                        { status: 'bg-green-500', task: 'Onboarding Cliente X', assignee: 'MG', progress: 100 },
+                                        { status: 'bg-blue-500', task: 'Campanha Black Friday', assignee: 'LS', progress: 75 },
+                                        { status: 'bg-yellow-500', task: 'Reunião Estratégica', assignee: 'GP', progress: 50 },
+                                        { status: 'bg-purple-500', task: 'Relatório Mensal', assignee: 'MG', progress: 25 },
+                                        { status: 'bg-orange-500', task: 'Automação WhatsApp', assignee: 'LS', progress: 60 }
+                                    ].map((item, i) => (
+                                        <div key={i} className="flex items-center gap-4 p-3 bg-white/5 rounded-lg border border-white/5 hover:bg-white/10 transition-colors">
+                                            <div className={`w-2 h-8 rounded-full ${item.status}`}></div>
+                                            <div className="flex-1">
+                                                <p className="text-white text-sm font-medium">{item.task}</p>
+                                                <div className="w-full bg-white/10 rounded-full h-1.5 mt-2">
+                                                    <div className={`h-1.5 rounded-full ${item.status}`} style={{ width: `${item.progress}%` }}></div>
+                                                </div>
+                                            </div>
+                                            <div className="w-8 h-8 rounded-full bg-clivy-purple/30 flex items-center justify-center text-xs font-bold text-white">
+                                                {item.assignee}
+                                            </div>
                                         </div>
                                     ))}
                                 </div>
 
-                                {/* Floating Cards */}
+                                {/* Floating Stats Card */}
                                 <motion.div
                                     animate={{ y: [0, -10, 0] }}
                                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                                    className="absolute -right-8 -top-8 p-4 bg-clivy-dark rounded-xl border border-white/10 shadow-2xl"
+                                    className="absolute -right-6 -top-6 p-4 bg-clivy-dark rounded-xl border border-white/10 shadow-2xl"
                                 >
                                     <div className="flex items-center gap-3">
                                         <div className="p-2 bg-green-500/20 rounded-lg">
@@ -255,7 +268,7 @@ export function Home() {
                                         </div>
                                         <div>
                                             <p className="text-xs text-gray-400">Tarefas concluídas</p>
-                                            <p className="text-lg font-bold">+128%</p>
+                                            <p className="text-lg font-bold text-white">+128%</p>
                                         </div>
                                     </div>
                                 </motion.div>
