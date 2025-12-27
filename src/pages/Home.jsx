@@ -268,23 +268,23 @@ export function Home() {
             </section>
 
             {/* CASES PREVIEW SECTION */}
-            <section id="cases-preview" className="py-24 md:py-32 px-4 bg-white text-clivy-dark relative overflow-hidden">
+            <section id="cases-preview" className="py-24 md:py-32 px-4 relative overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
-                        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gray-200 bg-gray-50 text-xs font-semibold uppercase tracking-wider mb-6">
+                        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs font-semibold uppercase tracking-wider mb-6 text-gray-300">
                             🌱 Resultados comprovados
                         </span>
-                        <h2 className="text-4xl md:text-6xl font-bold mb-6 font-heading">
+                        <h2 className="text-4xl md:text-6xl font-bold mb-6 font-heading text-white">
                             Conheça os nossos <br />
-                            <span className="text-clivy-purple">cases de sucesso</span>
+                            <span className="gradient-text">cases de sucesso</span>
                         </h2>
-                        <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-10">
+                        <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-10">
                             Descubra como agências e consultorias transformaram suas operações com as soluções da Clivy Company.
                         </p>
                         <div className="flex flex-col sm:flex-row justify-center gap-4">
                             <Link
                                 to="/cases"
-                                className="bg-clivy-dark text-white px-8 py-4 rounded-xl font-semibold flex justify-center items-center gap-2 hover:bg-black transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+                                className="bg-white text-clivy-dark px-8 py-4 rounded-xl font-semibold flex justify-center items-center gap-2 hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
                             >
                                 Veja nossos cases <ChevronRight size={18} />
                             </Link>
@@ -294,19 +294,20 @@ export function Home() {
             </section>
 
             {/* CTA Section */}
-            <section id="cta" className="py-24 md:py-32 px-4 relative overflow-hidden bg-gray-50">
+            <section id="cta" className="py-24 md:py-32 px-4 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-b from-clivy-dark to-clivy-purple/10 pointer-events-none"></div>
                 <div className="max-w-4xl mx-auto text-center relative z-10">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="bg-white rounded-3xl p-12 md:p-20 shadow-2xl"
+                        className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-3xl p-12 md:p-20 shadow-2xl"
                     >
-                        <h2 className="text-4xl md:text-6xl font-bold mb-8 text-clivy-dark">
+                        <h2 className="text-4xl md:text-6xl font-bold mb-8 text-white">
                             Quer resultados como esses <br />
-                            <span className="text-clivy-purple">na sua agência?</span>
+                            <span className="gradient-text">na sua agência?</span>
                         </h2>
-                        <p className="text-gray-500 text-lg md:text-xl mb-12 max-w-2xl mx-auto">
+                        <p className="text-gray-400 text-lg md:text-xl mb-12 max-w-2xl mx-auto">
                             Agende um diagnóstico gratuito e descubra como podemos transformar sua operação.
                         </p>
 
@@ -314,7 +315,7 @@ export function Home() {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => setIsModalOpen(true)}
-                            className="inline-flex items-center gap-3 bg-clivy-dark text-white hover:bg-black px-10 py-5 rounded-lg font-bold transition-all text-lg shadow-xl"
+                            className="inline-flex items-center gap-3 bg-white text-clivy-dark hover:bg-gray-100 px-10 py-5 rounded-full font-bold transition-all text-lg shadow-xl"
                         >
                             Agendar diagnóstico gratuito <ArrowRight size={22} />
                         </motion.button>
