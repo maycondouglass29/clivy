@@ -22,14 +22,14 @@ export function Cases() {
                         animate={{ opacity: 1, y: 0 }}
                     >
                         <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gray-200 bg-gray-50 text-xs font-semibold uppercase tracking-wider mb-6 text-gray-600">
-                            🌱 Resultados comprovados
+                            🚀 Histórias de transformação
                         </span>
                         <h1 className="text-4xl md:text-6xl font-bold mb-6 font-heading">
-                            Conheça os nossos <br />
-                            <span className="text-clivy-purple">cases de sucesso</span>
+                            Do caos à <br />
+                            <span className="text-clivy-purple">previsibilidade</span>
                         </h1>
                         <p className="text-gray-500 text-lg max-w-2xl mx-auto mb-10">
-                            Descubra como agências e consultorias transformaram suas operações com as soluções da Clivy Company e alcançaram resultados extraordinários.
+                            Veja como agências que viviam apagando incêndios hoje operam com processos claros, equipe alinhada e resultados consistentes.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <a
@@ -61,10 +61,10 @@ export function Cases() {
                             />
                         </div>
                         <div className="w-full md:w-1/2">
-                            <span className="text-clivy-purple text-sm font-bold uppercase tracking-wider mb-4 block">Vendas e Lançamentos</span>
+                            <span className="text-clivy-purple text-sm font-bold uppercase tracking-wider mb-4 block">Lançamentos Digitais</span>
                             <h2 className="text-4xl md:text-5xl font-bold mb-6">Gabriel Rucci</h2>
                             <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                                O Gabriel Rucci é referência no mercado de infoprodutos e gestão de lançamentos digitais. Com nossa consultoria, implementamos processos que permitiram escalar suas operações mantendo a qualidade. A organização do ClickUp foi fundamental para dobrar a capacidade operacional e eliminar o caos em períodos críticos de lançamento.
+                                Referência em infoprodutos, Gabriel vivia o caos típico de épocas de lançamento: equipe sobrecarregada, informações perdidas e retrabalho constante. Estruturamos processos claros no ClickUp que permitiram dobrar a capacidade operacional sem aumentar a equipe. Hoje, cada lançamento roda com previsibilidade.
                             </p>
                         </div>
                     </div>
@@ -83,10 +83,10 @@ export function Cases() {
                             />
                         </div>
                         <div className="w-full md:w-1/2">
-                            <span className="text-clivy-purple text-sm font-bold uppercase tracking-wider mb-4 block">Agência de Performance</span>
+                            <span className="text-clivy-purple text-sm font-bold uppercase tracking-wider mb-4 block">Tráfego Pago</span>
                             <h2 className="text-4xl md:text-5xl font-bold mb-6">Cacique Ads</h2>
                             <p className="text-gray-300 text-lg leading-relaxed mb-8">
-                                A Cacique Ads precisava de uma estrutura operacional robusta para suportar seu crescimento acelerado. Implementamos sistemas e processos que transformaram a gestão de projetos e otimizaram toda a operação da agência.
+                                Crescimento acelerado trouxe um problema: a operação não acompanhava. Clientes reclamando de prazos, equipe perdida em demandas e o dono preso no operacional. Criamos uma estrutura robusta com processos documentados e automações que liberaram a liderança para focar no estratégico.
                             </p>
                         </div>
                     </div>
@@ -105,10 +105,10 @@ export function Cases() {
                             />
                         </div>
                         <div className="w-full md:w-1/2">
-                            <span className="text-clivy-purple text-sm font-bold uppercase tracking-wider mb-4 block">Comunicação Digital</span>
+                            <span className="text-clivy-purple text-sm font-bold uppercase tracking-wider mb-4 block">Marketing 360°</span>
                             <h2 className="text-4xl md:text-5xl font-bold mb-6">Arretada Agência</h2>
                             <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                                A Arretada Agência buscava padronizar sua gestão e escalar processos sem perder a essência criativa. Desenvolvemos uma estrutura que une criatividade com eficiência operacional, permitindo crescimento sustentável.
+                                Criatividade não faltava, mas organização sim. A Arretada queria escalar sem perder a essência que a tornava única. Desenvolvemos uma estrutura que preserva o DNA criativo enquanto garante entregas consistentes e prazos cumpridos. Resultado: crescimento sustentável sem burnout da equipe.
                             </p>
                         </div>
                     </div>
@@ -127,10 +127,10 @@ export function Cases() {
                             />
                         </div>
                         <div className="w-full md:w-1/2">
-                            <span className="text-clivy-purple text-sm font-bold uppercase tracking-wider mb-4 block">Produção Audiovisual</span>
+                            <span className="text-clivy-purple text-sm font-bold uppercase tracking-wider mb-4 block">Produção de Vídeo</span>
                             <h2 className="text-4xl md:text-5xl font-bold mb-6">ATB Studio</h2>
                             <p className="text-gray-300 text-lg leading-relaxed mb-8">
-                                O ATB Studio enfrentava o desafio de gerir múltiplos projetos audiovisuais simultâneos. Criamos uma esteira operacional completa que permite melhor controle de recursos e prazos, elevando a qualidade das entregas.
+                                Múltiplos projetos audiovisuais rodando ao mesmo tempo, cada um com suas particularidades. O desafio era ter controle sem burocratizar a criação. Montamos uma esteira operacional que dá visibilidade total dos projetos, controla recursos e prazos, e ainda mantém a agilidade que produção de vídeo exige.
                             </p>
                         </div>
                     </div>
@@ -141,10 +141,10 @@ export function Cases() {
             <section className="py-24 bg-gray-50 text-center px-4">
                 <div className="max-w-3xl mx-auto">
                     <h2 className="text-3xl md:text-5xl font-bold mb-4">
-                        Quer resultados como esses na sua <span className="text-clivy-purple">agência</span>?
+                        Sua agência pode ser a <span className="text-clivy-purple">próxima</span>
                     </h2>
                     <p className="text-gray-500 mb-10 text-lg">
-                        Agende um diagnóstico gratuito e descubra como podemos transformar sua operação.
+                        Em 30 minutos identificamos os gargalos da sua operação e traçamos o caminho para sair do caos.
                     </p>
                     <button
                         onClick={() => setIsModalOpen(true)}

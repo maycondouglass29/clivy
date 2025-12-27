@@ -47,13 +47,13 @@ export function Home() {
                         </div>
 
                         <h1 className="text-5xl md:text-7xl font-bold leading-[1.1] mb-8 tracking-tight">
-                            Você já tem muitos clientes novos, <br />
-                            agora precisa retê-los <br />
-                            <span className="gradient-text pb-2">com uma gestão eficiente.</span>
+                            Sua agência cresce, <br />
+                            mas a operação não acompanha? <br />
+                            <span className="gradient-text pb-2">Vamos resolver isso.</span>
                         </h1>
 
                         <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed">
-                            Entre em contato conosco para entender como podemos te ajudar.
+                            Transformamos agências desorganizadas em operações previsíveis através de liderança, processos e tecnologia integrados.
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -81,7 +81,7 @@ export function Home() {
             {/* Social Proof Bar */}
             <div className="bg-clivy-dark border-y border-white/5 relative z-20 overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4 py-10">
-                    <p className="text-center text-gray-500 mb-8 text-sm font-medium uppercase tracking-wider">Empresas que confiam no Método Clivy</p>
+                    <p className="text-center text-gray-500 mb-8 text-sm font-medium uppercase tracking-wider">Agências que já saíram do caos com a Clivy</p>
                     <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
                         {['Imagine Company', 'Gabriel Rucci', 'Cacique Ads', 'Arretada Agência', 'V4 Company'].map((company) => (
                             <span key={company} className="text-xl md:text-2xl font-bold text-white cursor-default hover:text-clivy-purple transition-colors">{company}</span>
@@ -102,11 +102,11 @@ export function Home() {
                     >
                         <motion.span variants={itemVariants} className="text-clivy-purple font-bold tracking-wider text-sm mb-4 block uppercase">O Método Clivy</motion.span>
                         <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                            Três pilares para <br />
-                            <span className="gradient-text">eliminar o caos</span>
+                            A fórmula para <br />
+                            <span className="gradient-text">sair do caos operacional</span>
                         </motion.h2>
                         <motion.p variants={itemVariants} className="text-gray-400 text-lg max-w-2xl mx-auto">
-                            Não adianta apenas contratar ferramentas. A organização precisa começar pela mentalidade e ser suportada por processos claros.
+                            Ferramenta sozinha não resolve. Construímos a base que falta: mentalidade de gestão, processos documentados e tecnologia que conecta tudo.
                         </motion.p>
                     </motion.div>
 
@@ -121,20 +121,20 @@ export function Home() {
                             {
                                 icon: Users,
                                 title: "Liderança",
-                                desc: "O time é reflexo do líder. Formamos gestores capazes de conduzir a operação com autonomia.",
-                                items: ["Mapeamento de organograma", "Rituais de gestão", "Definição de OKRs", "Cultura de alta performance"]
+                                desc: "Seu time só vai funcionar quando você parar de apagar incêndios. Desenvolvemos líderes que conduzem a operação com autonomia.",
+                                items: ["Organograma funcional", "Rituais de alinhamento", "Metas claras com OKRs", "Cultura de responsabilidade"]
                             },
                             {
                                 icon: FileText,
                                 title: "Processos",
-                                desc: "Transformamos conhecimento tácito em processos documentados e replicáveis.",
-                                items: ["Playbooks de áreas", "Estrutura de rotinas", "POPs detalhados", "Padronização de entregas"]
+                                desc: "Se está na sua cabeça, não existe. Documentamos cada etapa para que qualquer pessoa execute com excelência.",
+                                items: ["Playbooks por área", "Rotinas estruturadas", "POPs passo a passo", "Entregas padronizadas"]
                             },
                             {
                                 icon: Zap,
                                 title: "Tecnologia",
-                                desc: "Automatizamos o operacional para que seu time foque no estratégico.",
-                                items: ["ClickUp Avançado", "Automações n8n/Make", "Dashboards BI", "Integração WhatsApp"]
+                                desc: "Chega de Trello, Excel e WhatsApp espalhados. Centralizamos tudo em um sistema que trabalha por você.",
+                                items: ["ClickUp personalizado", "Automações inteligentes", "Dashboards em tempo real", "Integrações conectadas"]
                             }
                         ].map((pilar, idx) => (
                             <motion.div key={idx} variants={itemVariants} className="gradient-border group">
@@ -176,19 +176,19 @@ export function Home() {
                         >
                             <span className="inline-block py-1 px-3 rounded-full bg-clivy-purple/10 border border-clivy-purple/20 text-clivy-purple text-xs font-bold mb-6 tracking-wider">OFFICIAL PARTNER</span>
                             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8">
-                                ClickUp como seu <br />
-                                <span className="gradient-text">Sistema Operacional</span>
+                                Seu negócio inteiro <br />
+                                <span className="gradient-text">em uma única tela</span>
                             </h2>
                             <p className="text-gray-400 text-lg mb-10 leading-relaxed">
-                                Esqueça o caos de usar Trello, Excel e WhatsApp ao mesmo tempo.
-                                Centralizamos sua operação em uma única ferramenta poderosa e customizada para o seu negócio.
+                                Pare de perder tempo alternando entre 10 ferramentas diferentes. 
+                                Montamos um ClickUp sob medida onde Marketing, Vendas, RH e Operações conversam entre si.
                             </p>
 
                             <div className="space-y-8">
                                 {[
-                                    { num: "01", title: "Centralização Total", desc: "Marketing, Vendas, RH e Operações em um só lugar." },
-                                    { num: "02", title: "Visão 360º", desc: "Monitore a saúde de todos os projetos em uma única tela." },
-                                    { num: "03", title: "Automações", desc: "Elimine tarefas manuais e erros humanos do dia a dia." }
+                                    { num: "01", title: "Tudo centralizado", desc: "Todos os departamentos em um só lugar, sem informação perdida." },
+                                    { num: "02", title: "Visibilidade total", desc: "Saiba exatamente o status de cada projeto e cliente em segundos." },
+                                    { num: "03", title: "Trabalho automático", desc: "Tarefas criadas, avisos enviados e relatórios gerados sem você fazer nada." }
                                 ].map((item, idx) => (
                                     <div key={idx} className="flex gap-6 group">
                                         <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center shrink-0 border border-white/10 group-hover:border-clivy-purple/50 group-hover:bg-clivy-purple/10 transition-all">
@@ -283,14 +283,14 @@ export function Home() {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs font-semibold uppercase tracking-wider mb-6 text-gray-300">
-                            🌱 Resultados comprovados
+                            🚀 Transformações reais
                         </span>
                         <h2 className="text-4xl md:text-6xl font-bold mb-6 font-heading text-white">
-                            Conheça os nossos <br />
-                            <span className="gradient-text">cases de sucesso</span>
+                            Quem já passou <br />
+                            <span className="gradient-text">pela transformação</span>
                         </h2>
                         <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-10">
-                            Descubra como agências e consultorias transformaram suas operações com as soluções da Clivy Company.
+                            Agências que estavam no caos e hoje operam com previsibilidade, processos claros e tecnologia funcionando.
                         </p>
                         <div className="flex flex-col sm:flex-row justify-center gap-4">
                             <Link
@@ -315,11 +315,11 @@ export function Home() {
                         className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-3xl p-12 md:p-20 shadow-2xl"
                     >
                         <h2 className="text-4xl md:text-6xl font-bold mb-8 text-white">
-                            Quer resultados como esses <br />
-                            <span className="gradient-text">na sua agência?</span>
+                            Pronto para parar de <br />
+                            <span className="gradient-text">apagar incêndios?</span>
                         </h2>
                         <p className="text-gray-400 text-lg md:text-xl mb-12 max-w-2xl mx-auto">
-                            Agende um diagnóstico gratuito e descubra como podemos transformar sua operação.
+                            Em 30 minutos mapeamos os gargalos da sua operação e mostramos o caminho para sair do caos. Sem compromisso.
                         </p>
 
                         <motion.button
