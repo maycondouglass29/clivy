@@ -32,13 +32,16 @@ export function Cases() {
                             Descubra como agências e consultorias transformaram suas operações com as soluções da Clivy Company e alcançaram resultados extraordinários.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <button
-                                onClick={() => setIsModalOpen(true)}
+                            <a
+                                href="#cases-list"
                                 className="bg-clivy-purple hover:bg-clivy-purple-dark text-white px-8 py-4 rounded-full font-bold transition-all flex items-center justify-center gap-2"
                             >
                                 Ver cases detalhados <ArrowRight size={18} />
-                            </button>
-                            <button className="border border-gray-300 text-gray-700 px-8 py-4 rounded-full font-bold transition-all hover:bg-gray-50 flex items-center justify-center gap-2">
+                            </a>
+                            <button 
+                                onClick={() => setIsModalOpen(true)}
+                                className="border border-gray-300 text-gray-700 px-8 py-4 rounded-full font-bold transition-all hover:bg-gray-50 flex items-center justify-center gap-2"
+                            >
                                 Quero resultados parecidos <ArrowRight size={18} />
                             </button>
                         </div>
@@ -47,7 +50,7 @@ export function Cases() {
             </section>
 
             {/* Gabriel Rucci - Full Width */}
-            <section className="py-16 px-4 bg-white">
+            <section id="cases-list" className="py-16 px-4 bg-white">
                 <div className="max-w-6xl mx-auto">
                     <div className="flex flex-col md:flex-row items-center gap-12">
                         <div className="w-full md:w-1/2">
