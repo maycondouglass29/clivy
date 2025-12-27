@@ -47,34 +47,32 @@ export function Home() {
                         </div>
 
                         <h1 className="text-5xl md:text-7xl font-bold leading-[1.1] mb-8 tracking-tight">
-                            Escale sua operação de serviços <br />
-                            <span className="gradient-text pb-2">sem o caos operacional.</span>
+                            Você já tem muitos clientes novos, <br />
+                            agora precisa retê-los <br />
+                            <span className="gradient-text pb-2">com uma gestão eficiente.</span>
                         </h1>
 
                         <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed">
-                            Implementamos Liderança, Processos e Tecnologia para transformar sua agência ou consultoria em uma máquina de escala previsível.
+                            Entre em contato conosco para entender como podemos te ajudar.
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                <Link
+                                    to="/cases"
+                                    className="flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold transition-all text-lg border border-white/30 text-white hover:bg-white/10"
+                                >
+                                    Veja nossos cases <ArrowRight size={18} />
+                                </Link>
+                            </motion.div>
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => setIsModalOpen(true)}
                                 className="bg-clivy-purple hover:bg-clivy-purple-dark text-white px-8 py-4 rounded-full font-bold transition-all flex items-center justify-center gap-2 text-lg shadow-xl shadow-clivy-purple/25"
                             >
-                                Agendar consultoria gratuita <ArrowRight size={20} />
+                                Agendar diagnóstico <ArrowRight size={18} />
                             </motion.button>
-                            <motion.a
-                                whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.05)" }}
-                                whileTap={{ scale: 0.95 }}
-                                href="#metodo"
-                                className="flex items-center gap-3 text-gray-300 hover:text-white px-8 py-4 rounded-full font-medium transition-all text-lg"
-                            >
-                                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                                    <Play size={16} className="ml-1 fill-current" />
-                                </div>
-                                Conhecer o método
-                            </motion.a>
                         </div>
                     </motion.div>
                 </div>
