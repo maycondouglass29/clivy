@@ -12,7 +12,7 @@ function WhatsAppButton() {
   const [isHovered, setIsHovered] = useState(false)
   
   // Número do WhatsApp conectado ao agente (formato: código país + DDD + número)
-  const whatsappNumber = "5522996052766"
+  const whatsappNumber = "5522997805784"
   const defaultMessage = "Olá! Vim pelo site da Clivy e gostaria de saber mais sobre a consultoria de vocês."
   
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`
