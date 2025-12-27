@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { Home } from './pages/Home'
 import { Cases } from './pages/Cases'
-import { Menu, X, ArrowRight, MessageCircle } from 'lucide-react'
+import { Menu, X, ArrowRight, MessageCircle, Instagram, Youtube, Linkedin } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
@@ -91,35 +91,34 @@ function Layout({ children }) {
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-8">
-              {['Método', 'ClickUp'].map((item, i) => (
-                isHome ? (
-                  <motion.a
-                    key={item}
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 * i }}
-                    href={`#${item.toLowerCase()}`}
-                    className="text-gray-300 hover:text-white hover:text-glow transition-all text-sm font-medium"
-                  >
-                    {item}
-                  </motion.a>
-                ) : (
-                  <Link
-                    key={item}
-                    to={`/#${item.toLowerCase()}`}
-                    className="text-gray-500 hover:text-clivy-purple transition-all text-sm font-medium"
-                  >
-                    {item}
-                  </Link>
-                )
-              ))}
-              <Link
-                to="/cases"
-                className={`${isHome ? 'text-gray-300 hover:text-white' : 'text-gray-500 hover:text-clivy-purple'} transition-all text-sm font-medium`}
-              >
-                Cases
-              </Link>
+            <nav className="hidden md:flex items-center gap-6">
+              {/* Social Icons */}
+              <div className="flex items-center gap-4">
+                <a
+                  href="https://instagram.com/clivycompany"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${isHome ? 'text-gray-400 hover:text-white' : 'text-gray-400 hover:text-clivy-dark'} transition-colors`}
+                >
+                  <Instagram size={20} />
+                </a>
+                <a
+                  href="https://youtube.com/@clivycompany"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${isHome ? 'text-gray-400 hover:text-white' : 'text-gray-400 hover:text-clivy-dark'} transition-colors`}
+                >
+                  <Youtube size={20} />
+                </a>
+                <a
+                  href="https://linkedin.com/company/clivy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${isHome ? 'text-gray-400 hover:text-white' : 'text-gray-400 hover:text-clivy-dark'} transition-colors`}
+                >
+                  <Linkedin size={20} />
+                </a>
+              </div>
 
               <motion.button
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -127,7 +126,7 @@ function Layout({ children }) {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsModalOpen(true)}
-                className={`${isHome ? 'bg-white text-clivy-dark hover:bg-gray-100 shadow-white/10' : 'bg-clivy-dark text-white hover:bg-black shadow-black/10'} px-6 py-2.5 rounded-full font-bold transition-all flex items-center gap-2 shadow-lg`}
+                className="bg-clivy-purple hover:bg-clivy-purple-dark text-white px-6 py-2.5 rounded-full font-bold transition-all flex items-center gap-2 shadow-lg shadow-clivy-purple/25"
               >
                 Agendar diagnóstico <ArrowRight size={16} />
               </motion.button>
